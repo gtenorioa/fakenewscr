@@ -38,9 +38,7 @@ library("randomForest")
 
 
 #Cargar datos
-setwd('C:\\Users\\gteno\\Google Drive (gtenorioa@ucenfotec.ac.cr)\\Proyecto de Investigación II\\R_scripts') #directorio
-#setwd('F:\\Google Drive\\Maestria\\Proyecto de Investigaci?n II\\R_scripts') 
-
+setwd({'<ruta>') #directorio
 
 datos_eng <- read_excel('LIWC2015_ResultsENG.xlsx') #Conjunto de datos ingles
 summary(datos_eng)
@@ -68,41 +66,6 @@ str(datos_esp)
 
 # Se establece el seed para garantizar obtener resultados consistentes.
 set.seed(42)
-
-
-#Limpieza variables con poca o cero varianza
-
-#nearZeroVar(datos_eng[7:80]) #varianza cercana a cero
-#nearZeroVar(datos_esp[7:69]) #SOlo para asegurarse que los mismos salen en el siguiente comando
-
-#no estamos removiendo nada aun, solo viendo que valores no tienen varianza
-#which(apply(datos_eng[7:80], 2, var) == 0) #cero varianza
-
-#which(apply(datos_esp[7:69], 2, var) == 0) 
-
-
-
-#Variables con la mitad de sus resultados la suma es 0. Para saber cuales se eliminaran 
-
-#which(colMeans(datos_eng[7:80] == 0) > 0.5)
-#which(colMeans(datos_esp[7:69] == 0) > 0.5)
-
-#removemos esas variables del conjunto de datos. 
-
-#str(datos_eng[6:69])
-#datos_eng <-datos_eng[-nearZeroVar(datos_eng, saveMetrics = FALSE)]
-
-#which(colMeans(datos_eng[5:59] == 0) > 0.5)
-
-#datos_eng2<- datos_eng[, -which(colMeans(datos_eng[7:80] == 0) > 0.5)]
-#str(datos_eng)
-
-
-#datos_esp2<- datos_esp[, -which(colMeans(datos_esp[7:69] == 0) > 0.5)]
-#str(datos_esp)
-
-#datos_esp <-datos_esp[-nearZeroVar(datos_esp, saveMetrics = FALSE)]
-
 
 #Visualizacion de variables.
 #Cantidad de observaciones
@@ -306,38 +269,6 @@ deng.prueba <- datos_eng[!splt, ]
 
 desp.entrenamiento <- datos_esp[splt1, ]
 desp.prueba <- datos_esp[!splt1, ]
-
-
-#deng.entrenamiento2 <- datos_eng2[splt, ]
-#deng.prueba2 <- datos_eng2[!splt, ]
-
-#desp.entrenamiento2 <- datos_esp2[splt, ]
-#desp.prueba2 <- datos_esp2[!splt, ]
-
-#Aplicar t?cnicas de balanceo de cargas - En este caso se aplica upSampling para garantizar que el n?mero de observaciones tanto las verdaderas
-#como las sospechosas es el mismo
-#deng.entrenamiento <- upSample(x = deng.entrenamiento[, -ncol(deng.entrenamiento)],
-#                               y = deng.entrenamiento$Clasificacion)
-#table(datos_eng$deng.entrenamiento)
-#table(deng.entrenamiento$Clasificacion)
-#summary(deng.entrenamiento)
-##deng.prueba <- upSample(x = deng.prueba[, -ncol(deng.prueba)],
-#                        y = deng.prueba$Clasificacion)
-#table(datos_eng$deng.prueba)
-#table(deng.prueba$Clasificacion)
-#desp.entrenamiento <- upSample(x = desp.entrenamiento[, -ncol(desp.entrenamiento)],
-#                               y = desp.entrenamiento$Clasificacion)
-#table(desp.entrenamiento$Clasificacion)
-
-#desp.prueba <- upSample(x = desp.prueba[, -ncol(desp.prueba)],
-#                        y = desp.prueba$Clasificacion)
-#table(desp.prueba$Clasificacion)
-
-
-###Modelo Ingenuo
-## Dado el balanceo de cargas el modelo ingenuo dar? una probabilidad de 50-50
-#modelo.ingenuo1 <- rep(0,nrow(desp.prueba))
-#table(desp.prueba$Clasificacion,modelo.ingenuo1)
 
 #============================================#
 #Regresion Logistica Conjunto Datos Ingles
